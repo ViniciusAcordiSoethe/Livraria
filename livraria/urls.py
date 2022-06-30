@@ -21,5 +21,7 @@ from core import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('teste/', views.teste),
-    path('pag2/' , views.teste2)
+    path('pag2/' , views.teste2),
+    path('categorias/', views.CategoriaView.as_view(), name='todascategorias'),
+    path('categoria/<int:pk>', views.CategoriaSoloView.as_view() , name='categoria'),
 ]

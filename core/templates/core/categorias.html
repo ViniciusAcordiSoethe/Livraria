@@ -1,0 +1,11 @@
+{% load static %}
+
+{% if latest_categoria_list %}
+<ul>
+    {% for categoria in latest_categoria_list %}
+    <li><a href="{% url 'categoria' categoria.id %}">{{ categoria.descricao }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>No Polls estão disponivel</p>
+{% endif %}
