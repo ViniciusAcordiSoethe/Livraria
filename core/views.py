@@ -2,7 +2,7 @@ from django.http import HttpResponse , JsonResponse
 from django.views import View , generic
 from django.views.decorators.csrf import csrf_exempt
 from core.models import Categoria
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render , get_object_or_404
 from django.utils.decorators import method_decorator
 
 from .forms import CategoriaForm
@@ -44,7 +44,10 @@ def criaressacategoria(request):
     else:
         return redirect('/categorias')
 
-
+def deletarCategoria(request , id):
+    categoria = get_object_or_404(Categoria, pk=id)
+    categoria.delete()
+    return redirect('/categorias')
     # def get(self, request , id=None):
     #     if id:
     #         qs = Categoria.objects.get(id=id)

@@ -25,5 +25,6 @@ urlpatterns = [
     path('categorias/', views.CategoriaView.as_view(), name='todascategorias'),
     path('categoria/<int:pk>', views.CategoriaSoloView.as_view() , name='categoria'),
     path('criarcategoria/', views.criarcategoria , name='criarcategoria'),
+    path('deletarcategoria/<int:id>', views.deletarCategoria, name='deletecategoria'),
     path('criaressacategoria', views.criaressacategoria, name='criaressacategoria' )
 ]
