@@ -38,9 +38,12 @@ def criarcategoria(request):
 
 def criaressacategoria(request):
     form = CategoriaForm(request.POST)
-    form.save()
-    
-    return redirect('/categorias')
+    if form.is_valid():
+        form.save()
+        return redirect('/categorias')
+    else:
+        return redirect('/categorias')
+
 
     # def get(self, request , id=None):
     #     if id:
