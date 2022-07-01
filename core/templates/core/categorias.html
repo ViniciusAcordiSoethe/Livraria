@@ -6,6 +6,9 @@
     <li><a href="{% url 'categoria' categoria.id %}">{{ categoria.descricao }}</a></li>
     {% endfor %}
 </ul>
+ <br>
+ <br>
+ <a href="{% url 'criarcategoria' %}"><button>Cadastrar Nova</button></a>
 {% else %}
-    <p>No Polls estão disponivel</p>
+    <p>os Cores estão disponivel</p>
 {% endif %}

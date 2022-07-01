@@ -2,7 +2,10 @@ from django.http import HttpResponse , JsonResponse
 from django.views import View , generic
 from django.views.decorators.csrf import csrf_exempt
 from core.models import Categoria
+from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
+
+from .forms import CategoriaForm
 
 import json
 # Create your views here.
@@ -25,6 +28,19 @@ class CategoriaView(generic.ListView):
 class CategoriaSoloView(generic.DetailView):
     model = Categoria
     template_name= 'core/detalhes.html'
+
+def criarcategoria(request):
+    form = CategoriaForm()
+    context = {
+        'form':form
+    }
+    return HttpResponse(render(request , 'core/criarcategoria.html' , context=context))
+
+def criaressacategoria(request):
+    form = CategoriaForm(request.POST)
+    form.save()
+    
+    return redirect('/categorias')
 
     # def get(self, request , id=None):
     #     if id:
