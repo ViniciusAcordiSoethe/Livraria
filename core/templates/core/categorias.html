@@ -5,6 +5,7 @@
     {% for categoria in latest_categoria_list %}
     <li><a href="{% url 'categoria' categoria.id %}">{{ categoria.descricao }}</a></li>
     <a href="{% url 'deletecategoria' categoria.id%}"><button>Deletar</button></a>
+    <a href="{% url 'updatecategoria' categoria.id%}"><button>Editar</button></a>
     {% endfor %}
 </ul>
  <br>

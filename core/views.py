@@ -1,3 +1,4 @@
+from click import pass_context
 from django.http import HttpResponse , JsonResponse
 from django.views import View , generic
 from django.views.decorators.csrf import csrf_exempt
@@ -48,6 +49,30 @@ def deletarCategoria(request , id):
     categoria = get_object_or_404(Categoria, pk=id)
     categoria.delete()
     return redirect('/categorias')
+
+def updateCategoria(request, id ):
+    if request.method == 'GET':
+        categoria = Categoria.objects.filter(id=id).first()
+        form = CategoriaForm(instance=categoria)
+
+        context= {
+            'categoria': categoria,
+            'form':form
+        }
+        return render(request , 'core/editarcategoria.html' , context=context)
+
+    elif request.method == 'POST':
+        categoria = Categoria.objects.filter(id=id).first()
+        form = CategoriaForm(request.POST, instance=categoria)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/categorias')
+        else:
+            return redirect('/categorias')
+
+
+    
     # def get(self, request , id=None):
     #     if id:
     #         qs = Categoria.objects.get(id=id)
@@ -57,10 +82,6 @@ def deletarCategoria(request , id):
     #         return JsonResponse(data)
     #     else:
     #         data = list(Categoria.objects.values())
-    #         formatted_data = json.dumps(data , ensure_ascii=False)
-    #         return HttpResponse(formatted_data, content_type="application/json")
-    # def post(self , request):
-    #     json_data = json.loads(request.body)
-    #     nova_categoria = Categoria.objects.create(**json_data)
+    #         formatted_data = json.dumps(data , ensure_ascii=False)dmin/core/categoria/
     #     data = {"id": nova_categoria.id, "descricao": nova_categoria.descricao}
     #     return JsonResponse(data)/categoria/1
