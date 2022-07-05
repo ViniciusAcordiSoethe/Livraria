@@ -84,4 +84,4 @@ def updateCategoria(request, id ):
     #         data = list(Categoria.objects.values())
     #         formatted_data = json.dumps(data , ensure_ascii=False)dmin/core/categoria/
     #     data = {"id": nova_categoria.id, "descricao": nova_categoria.descricao}
-    #     return JsonResponse(data)/categoria/1
+    #     return JsonResponse(data)/categoria/1$ 289,49

@@ -2,6 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class Comentario(models.Model):
+    conteudoComentario = models.CharField(max_length=255)
+    autor = models.ForeignKey(User , on_delete=models.PROTECT , related_name="comentarios" )
+    def __str__(self):
+        return self.conteudoComentario 
 
 class Categoria(models.Model):
     descricao = models.CharField(max_length=255)

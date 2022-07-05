@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import Categoria , Editora , Autor , Livro , Compra , StatusCompra , ItensCompra
+from core.models import Categoria, Comentario , Editora , Autor , Livro , Compra , StatusCompra , ItensCompra
 # Register your models here.
 
 class CategoriaAdmin(admin.ModelAdmin):
@@ -18,9 +18,14 @@ class ComprasAdmin(admin.ModelAdmin):
     inlines= (ItensInline,)
     list_display= ('id' , 'usuario' , 'status')
 
+class ComentarioAdmin(admin.ModelAdmin):
+    list_display=('id', 'conteudoComentario')
+    search_fields= ['conteudoComentario']
+
 admin.site.register(Autor)
 admin.site.register(Categoria , CategoriaAdmin)
 admin.site.register(Editora)
+admin.site.register(Comentario , ComentarioAdmin)
 admin.site.register(Livro , LivroAdmin)
 admin.site.register(Compra , ComprasAdmin)
 admin.site.register(StatusCompra , StatusCompraAdmin)
