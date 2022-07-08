@@ -2,9 +2,15 @@ from click import pass_context
 from django.http import HttpResponse , JsonResponse
 from django.views import View , generic
 from django.views.decorators.csrf import csrf_exempt
+from yaml import serialize
 from core.models import Categoria
 from django.shortcuts import redirect, render , get_object_or_404
 from django.utils.decorators import method_decorator
+
+from rest_framework.views import APIView
+from rest_framework.serializers import ModelSerializer
+from rest_framework.response import Response
+from rest_framework import status
 
 from .forms import CategoriaForm
 
@@ -85,3 +91,21 @@ def updateCategoria(request, id ):
     #         formatted_data = json.dumps(data , ensure_ascii=False)dmin/core/categoria/
     #     data = {"id": nova_categoria.id, "descricao": nova_categoria.descricao}
     #     return JsonResponse(data)/categoria/1$ 289,49
+
+class CategoriaSerializer(ModelSerializer):
+    class Meta:
+        model = Categoria
+        fields = '__all__'
+
+class CategoriasList(APIView):
+    def get(self, request):
+        categorias = Categoria.objects.all()
+        serializer = CategoriaSerializer(categorias, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = CategoriaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_404_BAD_REQUEST)

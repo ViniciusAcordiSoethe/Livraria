@@ -28,4 +28,5 @@ urlpatterns = [
     path('deletarcategoria/<int:id>', views.deletarCategoria, name='deletecategoria'),
     path('criaressacategoria', views.criaressacategoria, name='criaressacategoria' ),
     path('updatecategoria/<int:id>', views.updateCategoria, name= 'updatecategoria'),
+    path('categorias-apiview/', views.CategoriasList.as_view(), name='categorias-apiview'),
 ]
