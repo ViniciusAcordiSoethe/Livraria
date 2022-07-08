@@ -29,4 +29,5 @@ urlpatterns = [
     path('criaressacategoria', views.criaressacategoria, name='criaressacategoria' ),
     path('updatecategoria/<int:id>', views.updateCategoria, name= 'updatecategoria'),
     path('categorias-apiview/', views.CategoriasList.as_view(), name='categorias-apiview'),
+    path('categorias-apiview/<int:pk>', views.CategoriaDetailView.as_view() , name='categorias-apiviewunica'),
 ]
