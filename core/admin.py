@@ -29,5 +29,3 @@ admin.site.register(Comentario , ComentarioAdmin)
 admin.site.register(Livro , LivroAdmin)
 admin.site.register(Compra , ComprasAdmin)
 admin.site.register(StatusCompra , StatusCompraAdmin)
-
-
