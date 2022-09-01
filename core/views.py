@@ -1,8 +1,6 @@
-from click import pass_context
 from django.http import HttpResponse , JsonResponse
 from django.views import View , generic
 from django.views.decorators.csrf import csrf_exempt
-from yaml import serialize
 from core.models import Categoria
 from django.shortcuts import redirect, render , get_object_or_404
 from django.utils.decorators import method_decorator
