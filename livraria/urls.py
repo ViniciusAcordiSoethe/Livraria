@@ -30,4 +30,6 @@ urlpatterns = [
     path('updatecategoria/<int:id>', views.updateCategoria, name= 'updatecategoria'),
     path('categorias-apiview/', views.CategoriasList.as_view(), name='categorias-apiview'),
     path('categorias-apiview/<int:pk>', views.CategoriaDetailView.as_view() , name='categorias-apiviewunica'),
+    path('categorias-genericview/', views.CategoriasListCreateGeneric.as_view(), name='categorias-genericview'),
+    path('categorias-genericview/<int:id>', views.CategoriaRetrieveUpdateDestroyGeneric.as_view() , name='categorias-genericupdate'),
 ]

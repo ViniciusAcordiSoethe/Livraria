@@ -1,3 +1,4 @@
+from cgitb import lookup
 from django.http import HttpResponse , JsonResponse
 from django.views import View , generic
 from django.views.decorators.csrf import csrf_exempt
@@ -8,7 +9,7 @@ from django.utils.decorators import method_decorator
 from rest_framework.views import APIView
 from rest_framework.serializers import ModelSerializer
 from rest_framework.response import Response
-from rest_framework.generics import ListCreateAPIView 
+from rest_framework.generics import ListCreateAPIView , RetrieveUpdateDestroyAPIView
 from rest_framework import status
 
 from .forms import CategoriaForm
@@ -130,3 +131,13 @@ class CategoriaDetailView(APIView):
         categoria = get_object_or_404(Categoria.objects.all(), id=pk)
         categoria.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class CategoriasListCreateGeneric(ListCreateAPIView):
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
+
+class CategoriaRetrieveUpdateDestroyGeneric(RetrieveUpdateDestroyAPIView):
+    lookup_field = 'id'
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
