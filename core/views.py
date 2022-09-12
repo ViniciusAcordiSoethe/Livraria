@@ -6,11 +6,12 @@ from core.models import Categoria
 from django.shortcuts import redirect, render , get_object_or_404
 from django.utils.decorators import method_decorator
 
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.serializers import ModelSerializer
 from rest_framework.response import Response
 from rest_framework.generics import ListCreateAPIView , RetrieveUpdateDestroyAPIView
-from rest_framework import status
+from rest_framework.viewsets import ModelViewSet
 
 from .forms import CategoriaForm
 
@@ -139,5 +140,9 @@ class CategoriasListCreateGeneric(ListCreateAPIView):
 
 class CategoriaRetrieveUpdateDestroyGeneric(RetrieveUpdateDestroyAPIView):
     lookup_field = 'id'
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
+
+class CategoriaViewSet(ModelViewSet):
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
