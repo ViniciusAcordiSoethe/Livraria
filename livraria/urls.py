@@ -22,6 +22,7 @@ from core import views
 
 router = routers.DefaultRouter()
 router.register(r'categorias-viewset' , views.CategoriaViewSet)
+router.register(r'editoras-viewset' , views.EditoraViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
