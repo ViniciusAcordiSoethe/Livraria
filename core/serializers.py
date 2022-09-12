@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer , CharField
 
 from core.models import Categoria , Editora , Autor , Livro
 
@@ -24,6 +24,7 @@ class LivroSerializer(ModelSerializer):
         fields = '__all__'
 
 class LivroDetailSerializer(ModelSerializer):
+    categoria = CharField(source='categoria.descricao')
     class Meta:
         model = Livro
         fields = '__all__'
