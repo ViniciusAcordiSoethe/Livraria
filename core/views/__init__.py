@@ -9,3 +9,4 @@ from .primeiraParteDoTutorial.categoriaAPIView import *
 from .categoria import *
 from .editora import *
 from .autor import *
+from .livro import *
