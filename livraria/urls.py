@@ -21,15 +21,16 @@ from rest_framework import routers
 from core import views
 
 router = routers.DefaultRouter()
-router.register(r'categorias-viewset' , views.CategoriaViewSet)
-router.register(r'editoras-viewset' , views.EditoraViewSet)
+router.register(r'categorias' , views.CategoriaViewSet)
+router.register(r'editoras' , views.EditoraViewSet)
+router.register(r'autores' , views.AutorViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('teste/', views.teste),
     path('pag2/' , views.teste2),
-    path('categorias/', views.CategoriaView.as_view(), name='todascategorias'),
-    path('categoria/<int:pk>', views.CategoriaSoloView.as_view() , name='categoria'),
+    path('categoriasteste/', views.CategoriaView.as_view(), name='todascategorias'),
+    path('categoriateste/<int:pk>', views.CategoriaSoloView.as_view() , name='categoria'),
     path('criarcategoria/', views.criarcategoria , name='criarcategoria'),
     path('deletarcategoria/<int:id>', views.deletarCategoria, name='deletecategoria'),
     path('criaressacategoria', views.criaressacategoria, name='criaressacategoria' ),

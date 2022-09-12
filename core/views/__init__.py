@@ -5,3 +5,4 @@ from .categoriaAPIView import *
 
 from .categoria import *
 from .editora import *
+from .autor import *
