@@ -16,15 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include  
 
-from rest_framework import routers
-
 from core import views
 
-router = routers.DefaultRouter()
-router.register(r'categorias' , views.CategoriaViewSet)
-router.register(r'editoras' , views.EditoraViewSet)
-router.register(r'autores' , views.AutorViewSet)
-router.register(r'livros' , views.LivroViewSet)
+from core.routers import router
 
 urlpatterns = [
     path('admin/', admin.site.urls),

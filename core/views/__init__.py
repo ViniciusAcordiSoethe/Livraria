@@ -10,3 +10,4 @@ from .categoria import *
 from .editora import *
 from .autor import *
 from .livro import *
+from .compras import *

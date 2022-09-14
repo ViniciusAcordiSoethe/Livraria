@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import F
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -47,6 +48,8 @@ class StatusCompra(models.Model):
     def __str__(self):
         return f'{self.tipo}'
 
+    
+
 def get_StatusCompra_user():
     return StatusCompra().objects.all()[0]
 class Compra(models.Model):
@@ -56,8 +59,12 @@ class Compra(models.Model):
 
     def __str__(self):
         return f'({self.status}) {self.usuario}'
+    @property
+    def total(self):
+        queryset = self.itens.all().aggregate(total=models.Sum(F('livro__preco') * F('quantidade')))
+        return queryset['total']
 
 class ItensCompra(models.Model):
-    compra = models.ForeignKey(Compra , on_delete=models.CASCADE, related_name="+")
+    compra = models.ForeignKey(Compra , on_delete=models.CASCADE, related_name="itens")
     livro = models.ForeignKey(Livro , on_delete=models.PROTECT, related_name="+")
     quantidade = models.IntegerField()
