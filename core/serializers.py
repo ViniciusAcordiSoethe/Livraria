@@ -58,3 +58,11 @@ class CompraSerializer(ModelSerializer):
         model = Compra
         fields = ('id','usuario','itens' , 'total')
 
+class CriarEditarCompraSerializer(ModelSerializer):
+    itens = ItensCompraSerializer(many=True)
+    class Meta:
+        model = Compra
+        fields = ('usuario','itens')
+
+    def create(self, validated_data):
+        itens = validated_data.pop('itens')
