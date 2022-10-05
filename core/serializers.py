@@ -43,7 +43,7 @@ class LivroDetailSerializer(ModelSerializer):
         return nome_autores
 
 class ItensCompraSerializer(ModelSerializer):
-    livro  = CharField(source='livro.titulo')
+    livro  = CharField(source='livro.id')
     class Meta:
         model = ItensCompra
         fields = ('livro','quantidade')
@@ -52,17 +52,28 @@ class ItensCompraSerializer(ModelSerializer):
 
 
 class CompraSerializer(ModelSerializer):
-    usuario = CharField(source='usuario.email')
+    usuario = CharField(source='usuario.id')
     itens = ItensCompraSerializer(many=True)
     class Meta:
         model = Compra
         fields = ('id','usuario','itens' , 'total')
 
+
+class CriarEditarItensCompraSerializer(ModelSerializer):
+    class Meta:
+        model = ItensCompra
+        fields = ('livro','quantidade')
+
 class CriarEditarCompraSerializer(ModelSerializer):
-    itens = ItensCompraSerializer(many=True)
+    itens = CriarEditarItensCompraSerializer(many=True)
     class Meta:
         model = Compra
         fields = ('usuario','itens')
 
     def create(self, validated_data):
         itens = validated_data.pop('itens')
+        compra = Compra.objects.create(**validated_data)
+        for item in itens:
+            ItensCompra.objects.create(compra=compra,**item)
+        compra.save()
+        return compra 
