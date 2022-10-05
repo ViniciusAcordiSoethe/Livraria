@@ -56,7 +56,7 @@ class CompraSerializer(ModelSerializer):
     itens = ItensCompraSerializer(many=True)
     class Meta:
         model = Compra
-        fields = ('id','usuario','itens' , 'total')
+        fields = ('id','usuario', 'status' ,'itens' , 'total')
 
 
 class CriarEditarItensCompraSerializer(ModelSerializer):
@@ -77,3 +77,12 @@ class CriarEditarCompraSerializer(ModelSerializer):
             ItensCompra.objects.create(compra=compra,**item)
         compra.save()
         return compra 
+
+    def update(self, instance, validated_date):
+        itens = validated_date.pop("itens")
+        if itens:
+            instance.itens.all().delete()
+            for item in itens:
+                ItensCompra.objects.create(compra=instance, **item)
+            instance.save()
+        return instance
