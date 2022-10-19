@@ -11,3 +11,9 @@ class CompraViewSet(ModelViewSet):
             return CompraSerializer
         else:
             return CriarEditarCompraSerializer
+
+    def get_queryset(self):
+        usuario = self.request.user 
+        if usuario.groups.filter(name='Administradores'):
+            return Compra.objects.all()
+        return Compra.objects.filter(usuario=usuario)
